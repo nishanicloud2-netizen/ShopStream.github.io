@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shop Stream Line - Home</title>
+<style>
+/* --------------------------------------------
+   BODY & BACKGROUND
+---------------------------------------------*/
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background: rgba(255,255,255,0.05);
+    background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(240,240,240,0.1));
+    color: #111;
+    overflow-x: hidden;
+    perspective: 1000px;
+}
+
+/* Subtle bubbles / floating effect */
+.nebula, .bubble {
+    position: fixed;
+    border-radius: 50%;
+    z-index: -1;
+    animation: drift 35s infinite alternate ease-in-out;
+}
+.nebula {
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(173,216,230,0.15), transparent);
+    top: 10%;
+    left: 5%;
+    filter: blur(50px);
+}
+.bubble {
+    width: 100px;
+    height: 100px;
+    background: rgba(173,216,230,0.1);
+    top: 70%;
+    left: 15%;
+    filter: blur(15px);
+}
+.bubble:nth-child(3){ top: 50%; left: 80%; width: 120px; height:120px; }
+
+@keyframes drift {
+    0% { transform: translate(0,0) rotate(0deg); }
+    50% { transform: translate(50px, -50px) rotate(180deg); }
+    100% { transform: translate(0,0) rotate(360deg); }
+}
+
+/* --------------------------------------------
+   GLASS RADIAL BUTTON
+---------------------------------------------*/
+#menu-toggle { display: none; }
+
+.glass-button {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 70px;
+    height: 70px;
+    background: rgba(255,255,255,0.3);
+    backdrop-filter: blur(12px);
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    z-index: 1001;
+}
+.glass-button:hover {
+    transform: scale(1.15) rotate(5deg);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.menu-items {
+    position: fixed;
+    top: 100px;
+    left: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.5s;
+}
+#menu-toggle:checked ~ .menu-items {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.menu-item {
+    width: 60px;
+    height: 60px;
+    background: rgba(255,255,255,0.25);
+    backdrop-filter: blur(12px);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #111;
+    font-size: 1.5rem;
+    text-decoration: none;
+    transition: 0.4s;
+    transform: translateY(-20px);
+}
+#menu-toggle:checked ~ .menu-items .menu-item {
+    animation: slideIn 0.5s forwards;
+}
+.menu-item:hover {
+    transform: scale(1.2);
+    background: rgba(255,255,255,0.4);
+    box-shadow: 0 0 15px #1c3fff, 0 0 25px #00bfff;
+}
+.menu-item:nth-child(1){animation-delay:0.05s;}
+.menu-item:nth-child(2){animation-delay:0.1s;}
+.menu-item:nth-child(3){animation-delay:0.15s;}
+.menu-item:nth-child(4){animation-delay:0.2s;}
+.menu-item:nth-child(5){animation-delay:0.25s;}
+
+@keyframes slideIn {
+    0% { opacity: 0; transform: translateY(-20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* --------------------------------------------
+   HEADER
+---------------------------------------------*/
+header {
+    position: relative;
+    text-align: center;
+    width: 100%;
+    margin-top: 40px;
+    padding: 20px 0;
+    background: rgba(255,255,255,0.25);
+    backdrop-filter: blur(15px);
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+}
+header h1 {
+    font-size: 3rem;
+    color: #111;
+    margin: 0;
+    letter-spacing: 1.5px;
+    background: linear-gradient(90deg,#1c3fff,#00bfff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientShift 5s infinite alternate;
+}
+@keyframes gradientShift {
+    0% { background-position:0% 50%; }
+    100% { background-position:100% 50%; }
+}
+
+/* --------------------------------------------
+   HERO SECTION
+---------------------------------------------*/
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 40px 20px 50px 20px;
+    text-align: center;
+}
+
+.hero {
+    padding: 60px 20px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+    transition: 0.5s;
+}
+
+.hero h2 {
+    font-size: 2.8rem;
+    color: #111;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin: 0 auto 25px;
+    max-width: 700px;
+    color: #333;
+}
+
+.hero .btn {
+    background: linear-gradient(45deg,#1c3fff,#00bfff);
+    padding: 14px 32px;
+    border-radius: 12px;
+    color: #fff;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.hero .btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 30px #00bfff;
+}
+
+/* --------------------------------------------
+   FEATURES
+---------------------------------------------*/
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+    gap: 25px;
+    margin-top: 60px;
+}
+
+.feature {
+    padding: 25px;
+    background: rgba(255,255,255,0.3);
+    border-radius: 20px;
+    text-align: center;
+    transition: 0.4s;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+.feature:hover {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 0 25px #00bfff;
+}
+
+/* --------------------------------------------
+   FOOTER
+---------------------------------------------*/
+.footer {
+    width: 100%;
+    padding: 50px 20px 25px 20px;
+    background: rgba(255,255,255,0.25);
+    backdrop-filter: blur(18px);
+    color: #111;
+    border-top: 1px solid rgba(255,255,255,0.3);
+    margin-top: 80px;
+}
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+    max-width: 1200px;
+    margin: auto;
+    justify-content: space-between;
+    text-align: left;
+}
+.footer-section h3 {
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+    color: #1c3fff;
+}
+.footer-section p, .footer-section a {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #333;
+    text-decoration: none;
+}
+.footer-section a:hover {
+    color: #0055ff;
+    text-decoration: underline;
+}
+.footer-bottom {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 0.85rem;
+    color: #555;
+}
+@media (max-width: 768px) {
+    .footer-container { flex-direction: column; gap: 25px; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- Nebula & Bubbles -->
+<div class="nebula"></div>
+<div class="bubble"></div>
+<div class="bubble"></div>
+
+<!-- GLASS RADIAL BUTTON -->
+<input type="checkbox" id="menu-toggle">
+<label for="menu-toggle" class="glass-button">☰</label>
+<div class="menu-items">
+    <a href="index.html" class="menu-item">🏠</a>
+    <a href="products.html" class="menu-item">🛒</a>
+    <a href="about.html" class="menu-item">📘</a>
+    <a href="contact.html" class="menu-item">📞</a>
+    <a href="games.html" class="menu-item">🎮</a>
+</div>
+
+<!-- HEADER -->
+<header>
+    <h1>Shop Stream</h1>
+</header>
+
+<!-- MAIN CONTENT -->
+<div class="container">
+    <section class="hero">
+        <h2>Welcome to the Future of Shopping</h2>
+        <p>Discover the latest tech gadgets, smart devices, and interstellar deals, all in one seamless shopping experience.</p>
+        <p>From interactive products to exclusive offers, Shop Stream brings the cosmos to your doorstep.</p>
+        <button class="btn">Explore Now</button>
+    </section>
+
+    <section class="features">
+        <div class="feature"><h3>Interactive Shopping</h3><p>Experience products in an animated, lifelike environment that brings them to life.</p></div>
+        <div class="feature"><h3>Galactic Deals</h3><p>Exclusive discounts from across the cosmos, updated daily for our shoppers.</p></div>
+        <div class="feature"><h3>Mini-Games</h3><p>Unlock rewards, discover hidden discounts, and play fun tech-themed games.</p></div>
+        <div class="feature"><h3>3D Product Views</h3><p>Inspect every detail of your favorite products with interactive 3D views.</p></div>
+    </section>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-section about">
+            <h3>About Shop Stream</h3>
+            <p>Shop Stream delivers cutting-edge gadgets and tech products in a clean, interactive, and futuristic online shopping environment.</p>
+        </div>
+        <div class="footer-section contact">
+            <h3>Contact Us</h3>
+            <p>Email: <a href="mailto:support@shopstream.com">support@shopstream.com</a></p>
+            <p>Phone: <a href="tel:+1234567890">+1 234 567 890</a></p>
+            <p>Address: 123 Galaxy Road, Cosmic City</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2025 Shop Stream. All rights reserved.</p>
+    </div>
+</footer>
+
+</body>
+</html>
